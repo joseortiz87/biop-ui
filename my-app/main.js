@@ -663,6 +663,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 
 
 
@@ -692,6 +695,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/login/login.component.css")]
         }),
+        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])('authManager')),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
             _shared_guard_authication_manager__WEBPACK_IMPORTED_MODULE_2__["AuthenticationManager"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
@@ -746,6 +750,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 
 
 var LogoutComponent = /** @class */ (function () {
@@ -766,6 +773,7 @@ var LogoutComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./logout.component.html */ "./src/app/logout/logout.component.html"),
             styles: [__webpack_require__(/*! ./logout.component.css */ "./src/app/logout/logout.component.css")]
         }),
+        __param(0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])('authManager')),
         __metadata("design:paramtypes", [_shared_guard_authication_manager__WEBPACK_IMPORTED_MODULE_1__["AuthenticationManager"]])
     ], LogoutComponent);
     return LogoutComponent;
@@ -1139,7 +1147,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReporteFormComponent", function() { return ReporteFormComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _shared_services_ReporteAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/services/ReporteAPI */ "./src/app/shared/services/ReporteAPI.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1151,10 +1158,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
 var ReporteFormComponent = /** @class */ (function () {
-    function ReporteFormComponent(api) {
-        this.api = api;
+    function ReporteFormComponent() {
         this.incidenteSelected = false;
         this.title = 'Reporte de Incidencias';
         this.lat = 19.047533471702927;
@@ -1264,7 +1269,6 @@ var ReporteFormComponent = /** @class */ (function () {
         this.ubicacion.setValue("[" + this.latMarker + "," + this.lngMarker + "]");
     };
     ReporteFormComponent.prototype.guardaDatos = function () {
-        var _this = this;
         this.reporteObj =
             {
                 nombre: this.nombre.value,
@@ -1279,9 +1283,6 @@ var ReporteFormComponent = /** @class */ (function () {
                 status: ''
             };
         console.log(JSON.stringify(this.reporteObj));
-        this.api.postReporte(this.reporteObj).subscribe(function (reporte) {
-            _this.reporteObj = reporte;
-        }, function (error) { return _this.error = error; });
         this.isRegistro = false;
     };
     ReporteFormComponent.prototype.seleccionIncidente = function (incidente) {
@@ -1295,7 +1296,7 @@ var ReporteFormComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./reporte-form.component.html */ "./src/app/main/reporte-form/reporte-form.component.html"),
             styles: [__webpack_require__(/*! ./reporte-form.component.css */ "./src/app/main/reporte-form/reporte-form.component.css")]
         }),
-        __metadata("design:paramtypes", [_shared_services_ReporteAPI__WEBPACK_IMPORTED_MODULE_2__["ReporteApi"]])
+        __metadata("design:paramtypes", [])
     ], ReporteFormComponent);
     return ReporteFormComponent;
 }());
@@ -1639,187 +1640,6 @@ var AuthenticationManager = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], AuthenticationManager);
     return AuthenticationManager;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/services/ReporteAPI.ts":
-/*!***********************************************!*\
-  !*** ./src/app/shared/services/ReporteAPI.ts ***!
-  \***********************************************/
-/*! exports provided: ReporteApi */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReporteApi", function() { return ReporteApi; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/app/shared/services/configuration.ts");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-/**
- * REST API
- * OpenAPI spec version: 0.1.0
- * Contact: joseortiz87@gmail.com
- *
- * NOTE: This class is auto generated by the swagger code generator program.
- * https://github.com/swagger-api/swagger-codegen.git
- * Do not edit the class manually.
- */
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-/* tslint:disable:no-unused-variable member-ordering */
-
-
-
-
-
-
-var ReporteApi = /** @class */ (function () {
-    function ReporteApi(http, configuration) {
-        this.http = http;
-        this.basePath = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl + '/v1';
-        this.defaultHeaders = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
-        this.configuration = new _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"]();
-        if (configuration) {
-            this.configuration = configuration;
-        }
-        /*
-        if (false) {
-          this.defaultHeaders.append('Content-Type', 'application/json');
-          this.defaultHeaders.append('Authorization', 'Bearer ');
-        }
-        */
-    }
-    /**
-     *
-     */
-    ReporteApi.prototype.getReportes = function (extraHttpRequestParams) {
-        return this.getReportesWithHttpInfo(extraHttpRequestParams)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (response) {
-            if (response.status === 204) {
-                return undefined;
-            }
-            else {
-                return response.json() || {};
-            }
-        }));
-    };
-    /**
- *
- */
-    ReporteApi.prototype.postReporte = function (reporte, extraHttpRequestParams) {
-        return this.postReporteWithHttpInfo(reporte, extraHttpRequestParams)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (response) {
-            if (response.status === 204) {
-                return undefined;
-            }
-            else {
-                return response.json() || {};
-            }
-        }));
-    };
-    /**
-     *
-     */
-    ReporteApi.prototype.getReportesWithHttpInfo = function (extraHttpRequestParams) {
-        var path = this.basePath + '/reportes';
-        var queryParameters = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["URLSearchParams"]();
-        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"](this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // to determine the Content-Type header
-        var consumes = [];
-        // to determine the Accept header
-        var produces = [
-            'application/json'
-        ];
-        // authentication (api_key) required
-        if (this.configuration.apiKey) {
-            headers.set('Authorization', this.configuration.apiKey);
-        }
-        var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestOptions"]({
-            method: _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestMethod"].Get,
-            headers: headers,
-            search: queryParameters,
-            withCredentials: this.configuration.withCredentials
-        });
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = Object.assign(requestOptions, extraHttpRequestParams);
-        }
-        return this.http.request(path, requestOptions);
-    };
-    /**
- *
- */
-    ReporteApi.prototype.postReporteWithHttpInfo = function (reporte, extraHttpRequestParams) {
-        var path = this.basePath + '/reporte';
-        var queryParameters = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["URLSearchParams"]();
-        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"](this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // to determine the Content-Type header
-        var consumes = [];
-        // to determine the Accept header
-        var produces = [
-            'application/json'
-        ];
-        // authentication (api_key) required
-        if (this.configuration.apiKey) {
-            headers.set('Authorization', this.configuration.apiKey);
-        }
-        var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestOptions"]({
-            method: _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestMethod"].Post,
-            headers: headers,
-            search: queryParameters,
-            withCredentials: this.configuration.withCredentials,
-            body: reporte
-        });
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = Object.assign(requestOptions, extraHttpRequestParams);
-        }
-        return this.http.request(path, requestOptions);
-    };
-    ReporteApi = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"])()),
-        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"],
-            _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"]])
-    ], ReporteApi);
-    return ReporteApi;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/services/configuration.ts":
-/*!**************************************************!*\
-  !*** ./src/app/shared/services/configuration.ts ***!
-  \**************************************************/
-/*! exports provided: Configuration */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Configuration", function() { return Configuration; });
-var Configuration = /** @class */ (function () {
-    function Configuration() {
-    }
-    return Configuration;
 }());
 
 
