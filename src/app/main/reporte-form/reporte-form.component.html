@@ -1,0 +1,53 @@
+
+<div class="grid-container">
+    <h1>{{ title }}</h1>
+
+    <div *ngIf="!incidenteSelected" class="example-container incidenteselect">
+        <mat-form-field>
+            <select matNativeControl [formControl]="incidente" 
+              (change)="seleccionIncidente($event.target.value)" placeholder="Incidente">
+                <option *ngFor="let inc of incidentes" value="{{inc.value}}" >
+                    {{inc.viewValue}}
+                </option>
+            </select>
+        </mat-form-field>
+    </div>
+
+    <!-- this creates a google map on the page with the given lat/lng from -->
+    <!-- the component as the initial center of the map: -->
+    <agm-map *ngIf="incidenteSelected" [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="placeMarker($event)">
+      <agm-marker ng-if="isMapClick" [latitude]="latMarker" [longitude]="lngMarker"></agm-marker>
+    </agm-map>
+
+    <div *ngIf="incidenteSelected" class="example-container">
+      <form class="example-container">
+        <mat-form-field>
+          <input matInput [formControl]="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [formControl]="fecha" [matDatepicker]="picker" placeholder="Seleccione la fecha">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [formControl]="reporte" placeholder="Reporte">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [formControl]="ubicacion" placeholder="Ubicacion">
+        </mat-form-field>
+
+        <mat-form-field>
+            <select matNativeControl [formControl]="incidencia" placeholder="Incidencia">
+                <option *ngFor="let inc of incidenteOp" value="{{inc.value}}" >
+                    {{inc.viewValue}}
+                </option>
+            </select>
+        </mat-form-field>
+
+        <button mat-raised-button (click)="guardaDatos()" color="primary">Enviar</button>
+      </form>
+    </div>
+</div>

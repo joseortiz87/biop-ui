@@ -1,0 +1,33 @@
+agm-map {
+    height: 300px;
+  }
+
+  .example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 70%;
+  }
+  
+  .example-container form{
+    margin-left: auto;
+    margin-bottom: 20px;
+  }
+  
+  .example-container form > * {
+    margin: 5px 0;
+  }
+  
+  .example-container .mat-radio-button {
+    margin: 0 5px;
+  }
+
+  .incidentes_button_style {
+    margin-left: 50%;
+  }
+
+  .incidenteselect {
+    margin-left: 20%;
+  }
