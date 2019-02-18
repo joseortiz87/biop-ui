@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { AuthenticationManager } from '../shared/guard/authication-manager';
 import {MatDialog} from '@angular/material';
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    private authManager: AuthenticationManager,
+    @Inject('authManager') private authManager: AuthenticationManager,
     private router: Router) { }
 
   username: string;

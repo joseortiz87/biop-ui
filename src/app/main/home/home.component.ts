@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { Chart } from 'chart.js';
-import { Card } from '../../shared/model/models';
 
 @Component({
   selector: 'app-home',

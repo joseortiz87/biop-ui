@@ -9,7 +9,8 @@ import { HomeComponent } from './main/home/home.component';
 import { AppRoutingModule } from './app.routing';
 import { HttpModule,Http } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { AuthenticationGuard } from './shared/guard/authentication-guard';
+import { AuthenticationGuard} from './shared/guard/authentication-guard';
+import { AuthenticationManager } from './shared/guard/authication-manager';
 import { MatNativeDateModule,MatIconModule,MatCardModule,MatProgressSpinnerModule } from '@angular/material';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -76,7 +77,7 @@ import { PieChartComponent } from './main/pie-chart/pie-chart.component';
     	        provide: Adal4HTTPService,  
     	        useFactory: Adal4HTTPService.factory,  
               deps: [Http, Adal4Service]
-            }, AuthenticationGuard],
+            }, AuthenticationGuard,AuthenticationManager ],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA ]
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { AuthenticationManager } from '../shared/guard/authication-manager';
 
 @Component({
@@ -10,7 +10,7 @@ export class LogoutComponent implements OnInit {
 
   isAuthenticated = false;  
 
-  constructor(private authManager: AuthenticationManager) {
+  constructor(@Inject('authManager') private authManager: AuthenticationManager) {
     this.isAuthenticated = this.authManager.isUserAuth();
   }
 

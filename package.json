@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build –prod –aot=false",
+    "build:prod": "ng build –prod –aot=false",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -26,6 +27,7 @@
     "@angular/router": "^6.1.0",
     "@types/chart.js": "^2.7.45",
     "adal-angular4": "^1.1.11",
+    "angular-lib-exp": "git+https://github.com/msusur/angular-lib-exp.git",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.7.3",
     "core-js": "^2.5.4",

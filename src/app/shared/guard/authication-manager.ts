@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core'; 
-import { Router, CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Adal4Service } from 'adal-angular4';
 
 @Injectable({
     providedIn: 'root'

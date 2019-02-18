@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ReporteApi } from '../../shared/services/ReporteAPI';
-import * as model from '../../shared/model/models';
+import { Reporte } from '../model/models';
 
 @Component({
   selector: 'app-reporte-form',
@@ -10,7 +9,7 @@ import * as model from '../../shared/model/models';
 })
 export class ReporteFormComponent implements OnInit {
 
-  constructor(private api: ReporteApi) { }
+  constructor() { }
 
   ngOnInit() {
     console.log("init reporte");
@@ -42,7 +41,7 @@ export class ReporteFormComponent implements OnInit {
       value: 2
     }
   ];
-  private reporteObj : model.Reporte = {};
+  private reporteObj : Reporte = {};
   private error;
 
   incidentes= [
@@ -143,12 +142,6 @@ export class ReporteFormComponent implements OnInit {
         status : ''
       };
     console.log(JSON.stringify(this.reporteObj));
-    this.api.postReporte(this.reporteObj).subscribe(
-      reporte => {
-          this.reporteObj = reporte;
-      },
-      error => this.error = error
-    );
     this.isRegistro = false;
   }
 
